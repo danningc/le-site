@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Walk in Progress</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #fff7f4;
+      --text: #121212;
+      --muted: #555;
+      --border: #121212;
+      --border-light: #d4cfc9;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Masthead ── */
+    .masthead {
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      flex-shrink: 0;
+    }
+
+    .masthead .site-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      color: var(--text);
+      padding: 1.25rem 0;
+      margin-right: 2rem;
+      white-space: nowrap;
+    }
+
+    /* ── Tabs ── */
+    .tabs {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      margin-left: auto;
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: 1.25rem 1.25rem calc(1.25rem - 2px);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      cursor: pointer;
+      transition: color 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+
+    .tab-btn.active {
+      color: var(--text);
+      border-bottom-color: var(--text);
+    }
+
+    /* On desktop, tabs are decorative — both columns always show */
+    @media (min-width: 769px) {
+      .tab-btn { display: none; }
+    }
+
+    /* ── Two-column layout ── */
+    .columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      flex: 1;
+    }
+
+    .col {
+      border-right: 1px solid var(--border-light);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .col:last-child {
+      border-right: none;
+    }
+
+    .col-header {
+      padding: 2.5rem 2rem 0.5rem;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .col-subhead {
+      padding: 0.5rem 2rem 1.5rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.6;
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    /* ── Project cards (stacked in left col) ── */
+    .project-card {
+      border-bottom: 1px solid var(--border-light);
+      padding: 1.75rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s ease;
+    }
+
+    a.project-card:hover {
+      background: rgba(0,0,0,0.025);
+    }
+
+    .project-card:last-child {
+      border-bottom: none;
+    }
+
+    .project-card .meta {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .meta .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #3d6b4f;
+      display: inline-block;
+    }
+
+    .meta .dot.soon {
+      background: var(--border-light);
+    }
+
+    .project-card h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .project-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .project-card .link-hint {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text);
+      border-bottom: 1px solid var(--text);
+      padding-bottom: 1px;
+      width: fit-content;
+      margin-top: 0.15rem;
+    }
+
+    /* ── Attention items (right col) ── */
+    .attention-item {
+      border-bottom: 1px solid var(--border-light);
+      padding: 1.5rem 2rem;
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 1rem;
+      align-items: baseline;
+      text-decoration: none;
+      color: inherit;
+      transition: background 0.15s ease;
+    }
+
+    a.attention-item:hover {
+      background: rgba(0,0,0,0.025);
+    }
+
+    .attention-item:last-child {
+      border-bottom: none;
+    }
+
+    .attention-type {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .attention-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .attention-title {
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1.3;
+    }
+
+    .attention-note {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.25rem 2rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      display: flex;
+      gap: 2rem;
+      flex-shrink: 0;
+    }
+
+    /* ── Mobile: toggle shows one col at a time ── */
+    @media (max-width: 768px) {
+      .columns {
+        grid-template-columns: 1fr;
+      }
+
+      .col {
+        border-right: none;
+      }
+
+      .col[data-col="attention"] {
+        display: none;
+      }
+
+      .col[data-col="attention"].active {
+        display: flex;
+      }
+
+      .col[data-col="building"].hidden {
+        display: none;
+      }
+
+      .attention-item {
+        grid-template-columns: 1fr;
+        gap: 0.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="masthead">
+    <a class="site-name" href="/">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline-block;vertical-align:middle;margin-right:6px;">
+        <circle cx="9" cy="4" r="2" fill="currentColor"/>
+        <path d="M6 8.5 Q9 7 12 8.5 L11 14 H9.5 L9 11 L8.5 14 H7 Z" fill="currentColor"/>
+        <path d="M7 14 L5.5 17 M11 14 L12.5 17" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>Walk in Progress</a>
+    <div class="tabs">
+      <button class="tab-btn active" data-target="building">Building</button>
+      <button class="tab-btn" data-target="attention">Paying attention to</button>
+    </div>
+  </nav>
+
+  <div class="columns">
+
+    <!-- Left: Building -->
+    <div class="col" data-col="building">
+      <div class="col-header">Things I'm<br>building.</div>
+      <div class="col-subhead">Small tools at the intersection of language, nature, and data.</div>
+
+      <a class="project-card" href="https://effulgent-sopapillas-ba9a08.netlify.app/" target="_blank" rel="noopener">
+        <div class="meta"><span class="dot"></span> Live</div>
+        <h2>Language Reader &amp; Flashcards</h2>
+        <p>Read texts in a foreign language and build a personal vocabulary list with flashcard review.</p>
+        <span class="link-hint">Open app →</span>
+      </a>
+
+      <div class="project-card">
+        <div class="meta"><span class="dot soon"></span> Coming soon</div>
+        <h2>Garden Plant Stories</h2>
+        <p>Identify plants growing in our garden and uncover their histories, uses, and folklore.</p>
+      </div>
+
+      <div class="project-card">
+        <div class="meta"><span class="dot soon"></span> Coming soon</div>
+        <h2>AI Data Analyst</h2>
+        <p>Conversational analysis of your data — ask questions, get charts and insights instantly.</p>
+      </div>
+    </div>
+
+    <!-- Right: Paying attention to -->
+    <div class="col" data-col="attention">
+      <div class="col-header">What I'm paying<br>attention to.</div>
+      <div class="col-subhead">Things I'm reading, writing, and sweating on.</div>
+
+      <div class="attention-item">
+        <span class="attention-type">Reading</span>
+        <div class="attention-content">
+          <span class="attention-title">The Anthropic Cosmological Principle</span>
+          <span class="attention-note">What is the significance of us observing the Universe?</span>
+        </div>
+      </div>
+
+      <div class="attention-item">
+        <span class="attention-type">Writing</span>
+        <div class="attention-content">
+          <span class="attention-title">The chaos from morning pages</span>
+          <span class="attention-note">What could you observe from the mind in waking?</span>
+        </div>
+      </div>
+
+      <div class="attention-item">
+        <span class="attention-type">Sweating On</span>
+        <div class="attention-content">
+          <span class="attention-title">Climbing</span>
+          <span class="attention-note">How to build the offline advantage and overwriting rooted fear?</span>
+        </div>
+      </div>
+      <div class="attention-item">
+        <span class="attention-type">Chanting</span>
+        <div class="attention-content">
+          <span class="attention-title">Chanson Francais</span>
+          <span class="attention-note">Some said, we have music before language.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <span>© 2026 d-chen</span>
+    <span>walkinprogress.co</span>
+  </footer>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab-btn');
+    const colBuilding = document.querySelector('[data-col="building"]');
+    const colAttention = document.querySelector('[data-col="attention"]');
+
+    tabs.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+
+        if (btn.dataset.target === 'building') {
+          colBuilding.classList.remove('hidden');
+          colAttention.classList.remove('active');
+        } else {
+          colBuilding.classList.add('hidden');
+          colAttention.classList.add('active');
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
