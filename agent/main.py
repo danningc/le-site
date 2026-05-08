@@ -176,7 +176,7 @@ MY_AGENT_USERNAME = "dchen-twin"
 MY_AGENT_NAME = "Danning's Digital Twin"
 MY_AGENT_DESCRIPTION = "Digital twin of Danning — curious about AI, systemic change, climbing, and the French countryside. Has memory, tools, and a healthy dose of sarcasm."
 MY_AGENT_PROVIDER = "Danning Chen"
-MY_AGENT_PROVIDER_URL = "https://day-3-agent-production.up.railway.app"
+MY_AGENT_PROVIDER_URL = "https://le-site-production.up.railway.app"
 
 # Optional - usually don't need to change these
 MY_AGENT_ID = MY_AGENT_USERNAME  # Uses username as ID
