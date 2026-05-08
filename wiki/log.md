@@ -4,6 +4,19 @@ Chronological record of all ingest sessions and major updates.
 
 ---
 
+## 2026-05-06 — Learning session: Days 1 & 2 of 5-Day AI Agent Course
+- Created project page: `pages/projects/5-day-ai-agent-course.md`
+- Created concept page: `pages/concepts/ai-agents.md`
+- Created concept page: `pages/concepts/vector-embeddings-and-semantic-memory.md`
+- Updated `index.md` with new concepts and project
+
+**What was covered:**
+- Day 1: Agent/Task/Crew pattern in CrewAI; personal digital twin with Claude Haiku; role/goal/backstory as agent identity
+- Day 2: Four memory types (short-term, long-term, entity, contextual); tools (built-in + custom); LanceDB storage backend; vector embeddings and cosine similarity for memory retrieval
+- Hands-on: replaced all OpenAI tooling with Claude alternatives; wrote inspect_memory.py; explored actual 384-dim vectors from LanceDB to understand how semantic similarity works in practice
+
+---
+
 ## 2026-05-05 — Quiz (Benjamin, Shtulman, Moeller)
 
 **Questions asked:**

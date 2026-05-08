@@ -14,8 +14,11 @@ Master catalog of all pages. Add a line here whenever a new page is created.
 - [[Human-AI Teamwork]] — how humans and AI agents collaborate effectively; confidence signals matter
 - [[Imagination]] — capacity for possibility-thinking; grows with knowledge, not against it
 - [[Acquired Metabolism]] — organisms borrowing metabolic capabilities from other species via ecological interaction
+- [[AI Agents]] — autonomous units with role/goal/backstory/LLM/tools/memory; how they differ from chatbots
+- [[Vector Embeddings & Semantic Memory]] — text as 384-dim coordinates; cosine similarity; how agents remember across sessions
 
 ## Projects
+- [[5-Day AI Agent Course]] — MIT IAP NANDA course; building agents with CrewAI + Claude, Day 1–2 complete
 
 ## Synthesis
 

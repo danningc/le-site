@@ -1,0 +1,35 @@
+# ==============================================================================
+# Day 4: Agent-to-Agent Communication (A2A)
+# ==============================================================================
+
+# Core CrewAI with tools and memory support
+crewai[tools,anthropic]>=0.86.0
+
+# FastAPI and Server (for REST API + A2A)
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+
+# Data validation
+pydantic>=2.5.0
+
+# Environment management
+python-dotenv>=1.0.0
+
+# CrewAI Tools Collection
+crewai-tools>=0.12.0
+
+# Individual tool dependencies
+beautifulsoup4>=4.12.0             # For WebsiteSearchTool
+lxml>=4.9.0                        # For WebsiteSearchTool
+youtube-transcript-api>=0.6.0      # For YouTubeVideoSearchTool
+
+# HTTP requests for A2A communication
+requests>=2.31.0
+httpx>=0.26.0
+
+# ChromaDB (for memory persistence)
+chromadb>=0.4.0
+
+# Common dependencies
+aiohttp>=3.9.0                     # Async HTTP for A2A
+

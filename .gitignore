@@ -1,0 +1,5 @@
+agent/logs/
+agent/__pycache__/
+__pycache__/
+.env
+*.pyc
