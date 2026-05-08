@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Talk to Danning's Twin — Walk in Progress</title>
+  <title>Check in with Danning</title>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -147,6 +148,33 @@
       40% { transform: translateY(-5px); }
     }
 
+    /* ── Markdown rendering in agent bubbles ── */
+    .message.agent .bubble p { margin-bottom: 0.6em; }
+    .message.agent .bubble p:last-child { margin-bottom: 0; }
+    .message.agent .bubble ul,
+    .message.agent .bubble ol { padding-left: 1.4em; margin-bottom: 0.6em; }
+    .message.agent .bubble li { margin-bottom: 0.25em; }
+    .message.agent .bubble strong { font-weight: 600; }
+    .message.agent .bubble em { font-style: italic; }
+    .message.agent .bubble code {
+      font-family: monospace;
+      font-size: 0.85em;
+      background: rgba(0,0,0,0.06);
+      padding: 0.1em 0.35em;
+      border-radius: 3px;
+    }
+    .message.agent .bubble pre {
+      background: rgba(0,0,0,0.06);
+      padding: 0.75em 1em;
+      border-radius: 4px;
+      overflow-x: auto;
+      margin-bottom: 0.6em;
+    }
+    .message.agent .bubble pre code { background: none; padding: 0; }
+    .message.agent .bubble h1,
+    .message.agent .bubble h2,
+    .message.agent .bubble h3 { font-weight: 600; margin-bottom: 0.4em; }
+
     /* ── Input bar ── */
     .input-bar {
       border-top: 1px solid var(--border);
@@ -221,7 +249,7 @@
   <div class="chat-wrap" id="chatWrap">
     <div class="chat-intro">
       <h1>Talk to my<br>digital twin.</h1>
-      <p>An AI trained on how I think — ask it about what I'm working on,<br>what I care about, or anything else.</p>
+      <p>An AI trained on how I think — ask it about what I'm working on,<br>what I pay attention to, or anything else.</p>
     </div>
   </div>
 
@@ -265,7 +293,11 @@
 
       const bubble = document.createElement('div')
       bubble.className = 'bubble'
-      bubble.textContent = text
+      if (type === 'agent') {
+        bubble.innerHTML = marked.parse(text)
+      } else {
+        bubble.textContent = text
+      }
       wrap.appendChild(bubble)
 
       if (meta) {

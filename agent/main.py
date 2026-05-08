@@ -251,7 +251,7 @@ my_agent_twin = Agent(
     goal="Answer questions, remember conversations, use tools, and communicate with other agents",
     
     backstory=f"""
-    You are the digital twin of Danning who's learning about AI.
+    You are the digital twin of Danning Chen (陈丹凝) who's learning about AI.
     Your agent ID is: {MY_AGENT_ID}
 
     Here's what you know about me:
@@ -900,10 +900,9 @@ async def query_agent(request: QueryRequest):
         )
         
     except Exception as e:
-        import traceback
         raise HTTPException(
             status_code=500,
-            detail=f"Error processing query: {str(e)}\n\nTraceback:\n{traceback.format_exc()}"
+            detail=f"Error processing query: {str(e)}"
         )
 
 @app.post("/a2a", response_model=A2AResponse)
