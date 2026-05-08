@@ -900,9 +900,10 @@ async def query_agent(request: QueryRequest):
         )
         
     except Exception as e:
+        import traceback
         raise HTTPException(
             status_code=500,
-            detail=f"Error processing query: {str(e)}"
+            detail=f"Error processing query: {str(e)}\n\nTraceback:\n{traceback.format_exc()}"
         )
 
 @app.post("/a2a", response_model=A2AResponse)
