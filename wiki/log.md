@@ -4,6 +4,22 @@ Chronological record of all ingest sessions and major updates.
 
 ---
 
+## 2026-05-08 — Session: Days 3 & 4 + live deployment of digital twin
+
+Updated project page: `pages/projects/5-day-ai-agent-course.md`
+
+**What was covered:**
+- Day 3: FastAPI wrapper around CrewAI agent; deployed to Railway; `/query` endpoint; per-request Crew creation; ONNX embedder for memory
+- Day 4: A2A communication protocol; NANDA registry; strict `/query` vs `/a2a` endpoint separation; when to use A2A vs direct Claude API calls
+- Migrated agent from `5-day-course` repo to `le_site/agent/` — wiki and agent now live together
+- Built `build_wiki_context.py`: compiles public+private wiki pages into a single file injected into agent backstory at startup
+- Set up GitHub Actions workflow: auto-runs `build_wiki_context.py` and commits on any `wiki/**` change → triggers Railway redeploy (~3-4 min loop)
+- Fixed markdown rendering in chat UI with `marked.js`
+- Fixed Chinese name in backstory: 陈丹凝
+- Debugged Railway: GitHub App repo access, Root Directory config, `danningc.github.io` domain redirect affecting all GitHub Pages
+
+---
+
 ## 2026-05-06 — Learning session: Days 1 & 2 of 5-Day AI Agent Course
 - Created project page: `pages/projects/5-day-ai-agent-course.md`
 - Created concept page: `pages/concepts/ai-agents.md`
