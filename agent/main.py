@@ -886,8 +886,9 @@ async def query_agent(request: QueryRequest):
             verbose=False,
         )
         
-        # Execute the crew
-        result = await crew.kickoff_async()
+        # Run sync kickoff in a thread to avoid blocking the event loop
+        import asyncio
+        result = await asyncio.to_thread(crew.kickoff)
         
         # Calculate processing time
         end_time = datetime.now()
