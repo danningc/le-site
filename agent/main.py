@@ -887,7 +887,7 @@ async def query_agent(request: QueryRequest):
         )
         
         # Execute the crew
-        result = crew.kickoff()
+        result = await crew.kickoff_async()
         
         # Calculate processing time
         end_time = datetime.now()
